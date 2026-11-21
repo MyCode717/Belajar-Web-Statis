@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sejarah Perang Dunia II (1939-1945) | Arsip Sejarah Dunia</title>
+    
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Konfigurasi Warna & Font Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bgDark: '#121212',
+                        surfaceDark: '#1A1918',
+                        surfaceElevated: '#242220',
+                        cream: '#F4F1EA',
+                        creamMuted: '#B8B2A6',
+                        crimson: '#B22222',
+                        crimsonDark: '#801515',
+                        goldAntique: '#C5A059',
+                        goldLight: '#E0C07D'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Efek Tekstur Kertas Tua / Film Grain Halus */
+        .paper-grain {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Animasi Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Garis Tengah Timeline */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #C5A059, #B22222, transparent);
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #33302D;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C5A059;
+        }
+    </style>
+</head>
+<body class="bg-bgDark text-cream font-sans antialiased selection:bg-crimson selection:text-cream overflow-x-hidden">
+
+    <!-- Overlay Tekstur Grain -->
+    <div class="paper-grain" aria-hidden="true"></div>
+
+    <!-- 1. NAVBAR NAVIGASI MELAYANG (STICKY) -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo / Brand -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-9 h-9 rounded-lg bg-surfaceElevated border border-goldAntique/40 flex items-center justify-center text-goldAntique group-hover:border-goldAntique transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-lg tracking-wide text-cream block leading-none">ARSIP <span class="text-goldAntique">1939</span></span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-creamMuted">Sejarah Dunia</span>
+                    </div>
+                </a>
+
+                <!-- Menu Navigasi Desktop -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#latar-belakang" class="text-creamMuted hover:text-goldAntique transition-colors">Latar Belakang</a>
+                    <a href="#linimasa" class="text-creamMuted hover:text-goldAntique transition-colors">Linimasa Utama</a>
+                    <a href="#tokoh" class="text-creamMuted hover:text-goldAntique transition-colors">Tokoh Kunci</a>
+                    <a href="#statistik" class="text-creamMuted hover:text-goldAntique transition-colors">Statistik</a>
+                    <a href="#dampak" class="text-creamMuted hover:text-goldAntique transition-colors">Dampak Global</a>
+                </nav>
+
+                <!-- Tombol Menu Mobile -->
+                <button id="mobile-menu-btn" aria-label="Buka Menu" class="md:hidden p-2.5 rounded-lg bg-surfaceElevated border border-white/10 text-cream hover:text-goldAntique focus:outline-none">
+                    <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropdown Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-surfaceDark/95 backdrop-blur-md border-b border-white/10 px-4 pt-2 pb-6 space-y-2">
+            <a href="#latar-belakang" class="mobile-link block px-4 py-3 rounded-lg text-base font-medium text-cream hover:bg-surfaceElevated hover:text-goldAntique">Latar Belakang</a>
+            <a href="#linimasa" class="mobile-link block px-4 py-3 rounded-lg text-base font-medium text-cream hover:bg-surfaceElevated hover:text-goldAntique">Linimasa Utama</a>
+            <a href="#tokoh" class="mobile-link block px-4 py-3 rounded-lg text-base font-medium text-cream hover:bg-surfaceElevated hover:text-goldAntique">Tokoh Kunci</a>
+            <a href="#statistik" class="mobile-link block px-4 py-3 rounded-lg text-base font-medium text-cream hover:bg-surfaceElevated hover:text-goldAntique">Fakta & Statistik</a>
+            <a href="#dampak" class="mobile-link block px-4 py-3 rounded-lg text-base font-medium text-cream hover:bg-surfaceElevated hover:text-goldAntique">Dampak Global</a>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <!-- Dekorasi Latar Belakang Editorial & Peta Abstrak SVG -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(178,34,34,0.16),transparent_50%),radial-gradient(circle_at_bottom_left,rgba(197,160,89,0.12),transparent_55%)]"></div>
+            <!-- Grid Koordinat Peta Halus -->
+            <div class="absolute inset-0 opacity-[0.06]" style="background-image: linear-gradient(#C5A059 1px, transparent 1px), linear-gradient(90deg, #C5A059 1px, transparent 1px); background-size: 64px 64px;"></div>
+            <!-- Lingkaran Radar / Kompas SVG -->
+            <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] sm:w-[850px] sm:h-[850px] text-goldAntique/[0.05]" viewBox="0 0 400 400" fill="none">
+                <circle cx="200" cy="200" r="190" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4"/>
+                <circle cx="200" cy="200" r="140" stroke="currentColor" stroke-width="0.75"/>
+                <circle cx="200" cy="200" r="90" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 6"/>
+                <line x1="200" y1="0" x2="200" y2="400" stroke="currentColor" stroke-width="0.5"/>
+                <line x1="0" y1="200" x2="400" y2="200" stroke="currentColor" stroke-width="0.5"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <!-- Badge Tahun -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-surfaceElevated/90 border border-goldAntique/30 text-goldAntique text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase mb-8 shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-crimson animate-pulse"></span>
+                1 September 1939 - 2 September 1945
+            </div>
+
+            <!-- Judul Utama Dramatis -->
+            <h1 class="font-serif font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-cream leading-[1.1] mb-6">
+                Perang Dunia II: <br class="hidden sm:block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cream via-goldLight to-goldAntique">
+                    Konflik yang Mengubah Wajah Dunia
+                </span>
+            </h1>
+
+            <!-- Subjudul Singkat -->
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-creamMuted leading-relaxed mb-10 font-light">
+                Sebuah tinjauan historis komprehensif mengenai konflik bersenjata paling luas dan paling destruktif dalam sejarah peradaban manusia, yang melibatkan lebih dari 30 negara di seluruh benua.
+            </p>
+
+            <!-- Kutipan Sejarah -->
+            <blockquote class="max-w-2xl mx-auto mb-10 p-6 rounded-2xl bg-surfaceDark/80 border-l-4 border-crimson text-left shadow-xl backdrop-blur-sm">
+                <p class="font-serif italic text-base sm:text-lg text-cream/95 mb-2">
+                    "Kita tidak akan pernah menyerah. Kita akan bertempur di pantai, kita akan bertempur di tempat pendaratan, kita akan bertempur di ladang dan di jalanan."
+                </p>
+                <footer class="text-xs sm:text-sm text-goldAntique font-medium tracking-wider uppercase">
+                    — Winston Churchill, Perdana Menteri Inggris (4 Juni 1940)
+                </footer>
+            </blockquote>
+
+            <!-- Tombol CTA -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#latar-belakang" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-crimson hover:bg-crimsonDark text-cream font-semibold text-sm sm:text-base tracking-wide transition-all duration-300 shadow-lg shadow-crimson/25 hover:shadow-crimson/40 hover:-translate-y-0.5">
+                    Mulai Jelajahi
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </a>
+                <a href="#linimasa" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-surfaceElevated hover:bg-surfaceElevated/80 border border-goldAntique/30 text-cream font-medium text-sm sm:text-base transition-all duration-300">
+                    Lihat Linimasa 1939-1945
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. PENGANTAR & LATAR BELAKANG -->
+    <section id="latar-belakang" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/5 bg-surfaceDark/40">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header Bagian -->
+            <div class="max-w-3xl mb-16 reveal">
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-goldAntique block mb-3">Bab I · Akar Konflik</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-5xl text-cream mb-5 leading-tight">
+                    Latar Belakang & Pemicu Perang
+                </h2>
+                <p class="text-creamMuted text-base sm:text-lg leading-relaxed">
+                    Perang Dunia II bukanlah peristiwa yang meletus secara tiba-tiba, melainkan akumulasi dari ketegangan politik, krisis ekonomi global (Depresi Besar 1929), serta kegagalan diplomasi internasional pasca-Perang Dunia I.
+                </p>
+            </div>
+
+            <!-- 3 Faktor Penyebab Utama -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 reveal">
+                <!-- Kartu 1 -->
+                <div class="p-7 rounded-2xl bg-surfaceDark border border-white/10 hover:border-goldAntique/40 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-crimson/15 border border-crimson/30 flex items-center justify-center text-crimson mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-goldAntique uppercase tracking-wider">1919</span>
+                        <h3 class="font-serif font-bold text-xl text-cream mt-1 mb-3">Perjanjian Versailles</h3>
+                        <p class="text-sm text-creamMuted leading-relaxed">
+                            Perjanjian damai yang mengakhiri Perang Dunia I membebankan pampasan perang berat, pembatasan militer, dan kehilangan wilayah kepada Jerman. Hal ini memicu rasa terhina mendalam dan sentimen nasionalisme ekstrem.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Kartu 2 -->
+                <div class="p-7 rounded-2xl bg-surfaceDark border border-white/10 hover:border-goldAntique/40 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-crimson/15 border border-crimson/30 flex items-center justify-center text-crimson mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-goldAntique uppercase tracking-wider">1920-an – 1930-an</span>
+                        <h3 class="font-serif font-bold text-xl text-cream mt-1 mb-3">Kebangkitan Fasisme</h3>
+                        <p class="text-sm text-creamMuted leading-relaxed">
+                            Krisis ekonomi membuka jalan bagi rezim totaliter: Benito Mussolini di Italia dan Adolf Hitler (Partai Nazi) di Jerman yang menjanjikan pemulihan kejayaan nasional melalui militerisme dan ekspansi wilayah (*Lebensraum*).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Kartu 3 -->
+                <div class="p-7 rounded-2xl bg-surfaceDark border border-white/10 hover:border-goldAntique/40 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-crimson/15 border border-crimson/30 flex items-center justify-center text-crimson mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-goldAntique uppercase tracking-wider">1931 – 1937</span>
+                        <h3 class="font-serif font-bold text-xl text-cream mt-1 mb-3">Ekspansi Kekaisaran Jepang</h3>
+                        <p class="text-sm text-creamMuted leading-relaxed">
+                            Untuk mengamankan sumber daya alam dan mendominasi Asia-Pasifik, militerisme Jepang menginvasi Manchuria (1931) dan melancarkan invasi penuh ke Tiongkok (1937), sementara Liga Bangsa-Bangsa gagal mencegah agresi tersebut.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perbandingan Dua Kubu Utama -->
+            <div class="reveal">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <h3 class="font-serif font-bold text-2xl sm:text-3xl text-cream mb-2">Dua Kubu Kekuatan Dunia</h3>
+                    <p class="text-sm text-creamMuted">Konflik membelah kekuatan global menjadi dua aliansi militer utama.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- BLOK SEKUTU -->
+                    <div class="rounded-2xl bg-gradient-to-b from-surfaceElevated to-surfaceDark border border-goldAntique/30 p-7 sm:p-9 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-goldAntique/10 rounded-bl-full pointer-events-none"></div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-3 py-1 rounded-md bg-goldAntique/20 text-goldAntique text-xs font-bold uppercase tracking-widest">Allied Powers</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-2xl sm:text-3xl text-cream mb-3">Blok Sekutu</h4>
+                        <p class="text-sm text-creamMuted leading-relaxed mb-6">
+                            Koalisi negara-negara yang bersatu untuk menghentikan agresi ekspansionis Blok Poros dan mempertahankan kedaulatan internasional.
+                        </p>
+                        <div class="space-y-3 border-t border-white/10 pt-5">
+                            <div class="flex items-start justify-between text-sm">
+                                <span class="font-semibold text-cream">Kekuatan Utama ("Empat Besar"):</span>
+                                <span class="text-goldAntique text-right">Inggris, Uni Soviet, Amerika Serikat, Tiongkok</span>
+                            </div>
+                            <div class="flex items-start justify-between text-sm">
+                                <span class="font-semibold text-cream">Anggota Pendukung:</span>
+                                <span class="text-creamMuted text-right">Prancis, Polandia, Kanada, Australia, India, Belanda</span>
+                            </div>
+                            <div class="flex items-start justify-between text-sm">
+                                <span class="font-semibold text-cream">Tujuan Strategis:</span>
+                                <span class="text-creamMuted text-right">Penyerahan tanpa syarat Blok Poros & tatanan perdamaian PBB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BLOK POROS -->
+                    <div class="rounded-2xl bg-gradient-to-b from-surfaceElevated to-surfaceDark border border-crimson/40 p-7 sm:p-9 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-crimson/15 rounded-bl-full pointer-events-none"></div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="px-3 py-1 rounded-md bg-crimson/20 text-red-400 text-xs font-bold uppercase tracking-widest">Axis Powers</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-2xl sm:text-3xl text-cream mb-3">Blok Poros</h4>
+                        <p class="text-sm text-creamMuted leading-relaxed mb-6">
+                            Aliansi militer yang diresmikan melalui Pakta Tripartit (1940) dengan ambisi merombak tatanan geopolitik dunia melalui penaklukan wilayah.
+                        </p>
+                        <div class="space-y-3 border-t border-white/10 pt-5">
+                            <div class="flex items-start justify-between text-sm">
+                                <span class="font-semibold text-cream">Kekuatan Inti:</span>
+                                <span class="text-red-400 text-right">Jerman Nazi, Kerajaan Italia, Kekaisaran Jepang</span>
+                            </div>
+                            <div class="flex items-start justify-between text-sm">
+                                <span class="font-semibold text-cream">Negara Sekutu Poros:</span>
+                                <span class="text-creamMuted text-right">Hungaria, Rumania, Bulgaria, Finlandia, Thailand</span>
+                            </div>
+                            <div class="flex items-start justify-between text-sm">
+                                <span class="font-semibold text-cream">Tujuan Strategis:</span>
+                                <span class="text-creamMuted text-right">Dominasi Eropa oleh Jerman-Italia & Asia Raya oleh Jepang</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. LINIMASA INTERAKTIF (1939–1945) -->
+    <section id="linimasa" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header Linimasa -->
+            <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-goldAntique block mb-3">Bab II · Kronologi Peristiwa</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-5xl text-cream mb-5">
+                    Linimasa Perang Dunia II
+                </h2>
+                <p class="text-creamMuted text-base sm:text-lg">
+                    Telusuri titik-titik krusial perjalanan perang dari invasi pertama di Eropa hingga menyerahnya Jepang di Pasifik. Gunakan filter fase di bawah untuk menyaring peristiwa.
+                </p>
+            </div>
+
+            <!-- Filter Fase / Tahun -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-16 reveal" id="timeline-filters">
+                <button data-filter="all" class="filter-btn active px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all bg-goldAntique text-bgDark shadow-md">
+                    Semua Peristiwa (1939-1945)
+                </button>
+                <button data-filter="awal" class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all bg-surfaceElevated text-creamMuted hover:text-cream border border-white/10">
+                    Fase I: Awal Perang (1939-1941)
+                </button>
+                <button data-filter="balik" class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all bg-surfaceElevated text-creamMuted hover:text-cream border border-white/10">
+                    Fase II: Titik Balik (1942-1943)
+                </button>
+                <button data-filter="akhir" class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all bg-surfaceElevated text-creamMuted hover:text-cream border border-white/10">
+                    Fase III: Akhir Perang (1944-1945)
+                </button>
+            </div>
+
+            <!-- Container Linimasa -->
+            <div class="relative timeline-line space-y-12" id="timeline-container">
+                <!-- Item Linimasa akan dirender melalui JavaScript agar interaktif dan bersih -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. TOKOH-TOKOH KUNCI -->
+    <section id="tokoh" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/5 bg-surfaceDark/40">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 reveal">
+                <div class="max-w-2xl">
+                    <span class="text-xs font-bold tracking-[0.25em] uppercase text-goldAntique block mb-3">Bab III · Arsitek & Pemimpin</span>
+                    <h2 class="font-serif font-bold text-3xl sm:text-5xl text-cream mb-4">
+                        Tokoh-Tokoh Kunci
+                    </h2>
+                    <p class="text-creamMuted text-base sm:text-lg">
+                        Keputusan strategis para pemimpin politik dan militer ini menentukan nasib jutaan manusia. Klik pada kartu tokoh untuk membaca biografi dan peran historis mereka secara mendalam.
+                    </p>
+                </div>
+                <div class="text-xs text-goldAntique flex items-center gap-2 bg-surfaceElevated px-4 py-2.5 rounded-xl border border-goldAntique/20 self-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                    <span>Klik kartu untuk detail lengkap</span>
+                </div>
+            </div>
+
+            <!-- Grid Kartu Tokoh -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="leaders-grid">
+                <!-- Kartu tokoh dirender via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FAKTA & STATISTIK KUNCI (INFOGRAFIS ANGKA) -->
+    <section id="statistik" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(178,34,34,0.12),transparent_70%)] pointer-events-none"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-goldAntique block mb-3">Bab IV · Skala Konflik</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-5xl text-cream mb-4">
+                    Fakta & Statistik Kunci
+                </h2>
+                <p class="text-creamMuted text-base sm:text-lg">
+                    Angka-angka yang menggambarkan besarnya mobilisasi manusia, sumber daya, serta tragedi kemanusiaan selama enam tahun peperangan global.
+                </p>
+            </div>
+
+            <!-- Grid Angka Mencolok -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                <!-- Stat 1 -->
+                <div class="p-8 rounded-2xl bg-surfaceDark border border-goldAntique/30 text-center shadow-xl">
+                    <div class="text-xs uppercase tracking-widest text-goldAntique font-semibold mb-3">Durasi Konflik</div>
+                    <div class="font-serif font-black text-4xl sm:text-5xl text-cream mb-2">6 Tahun</div>
+                    <div class="text-sm font-medium text-cream/80 mb-3">1 Hari (2.194 Hari)</div>
+                    <p class="text-xs text-creamMuted leading-relaxed">
+                        Berlangsung dari invasi Jerman ke Polandia (1 Sept 1939) hingga kapitulasi resmi Jepang di Teluk Tokyo (2 Sept 1945).
+                    </p>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="p-8 rounded-2xl bg-surfaceDark border border-white/10 text-center shadow-xl">
+                    <div class="text-xs uppercase tracking-widest text-goldAntique font-semibold mb-3">Keterlibatan Global</div>
+                    <div class="font-serif font-black text-4xl sm:text-5xl text-goldLight mb-2">30+</div>
+                    <div class="text-sm font-medium text-cream/80 mb-3">Negara Terlibat Langsung</div>
+                    <p class="text-xs text-creamMuted leading-relaxed">
+                        Lebih dari 100 juta personel militer dimobilisasi di medan pertempuran Eropa, Pasifik, Afrika Utara, dan Asia.
+                    </p>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="p-8 rounded-2xl bg-surfaceDark border border-crimson/40 text-center shadow-xl">
+                    <div class="text-xs uppercase tracking-widest text-red-400 font-semibold mb-3">Korban Jiwa</div>
+                    <div class="font-serif font-black text-4xl sm:text-5xl text-crimson mb-2">70–85 Juta</div>
+                    <div class="text-sm font-medium text-cream/80 mb-3">Total Korban Tewas</div>
+                    <p class="text-xs text-creamMuted leading-relaxed">
+                        Sekitar 3% dari total populasi dunia tahun 1940 tewas akibat pertempuran, kelaparan, penyakit, dan genosida Holocaust.
+                    </p>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="p-8 rounded-2xl bg-surfaceDark border border-white/10 text-center shadow-xl">
+                    <div class="text-xs uppercase tracking-widest text-goldAntique font-semibold mb-3">Korban Sipil</div>
+                    <div class="font-serif font-black text-4xl sm:text-5xl text-cream mb-2">~50 Juta</div>
+                    <div class="text-sm font-medium text-cream/80 mb-3">Warga Sipil Gugur</div>
+                    <p class="text-xs text-creamMuted leading-relaxed">
+                        Untuk pertama kalinya dalam sejarah modern, jumlah korban sipil jauh melampaui korban personel militer di medan laga.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. DAMPAK & AKHIR PERANG -->
+    <section id="dampak" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/5 bg-surfaceDark/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="max-w-3xl mb-16 reveal">
+                <span class="text-xs font-bold tracking-[0.25em] uppercase text-goldAntique block mb-3">Bab V · Tatanan Dunia Baru</span>
+                <h2 class="font-serif font-bold text-3xl sm:text-5xl text-cream mb-5">
+                    Dampak & Warisan Pasca-Perang
+                </h2>
+                <p class="text-creamMuted text-base sm:text-lg leading-relaxed">
+                    Berakhirnya Perang Dunia II meruntuhkan imperium-imperium kolonial lama dan melahirkan arsitektur geopolitik modern yang dampaknya masih terasa hingga hari ini.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 reveal">
+                <!-- Dampak 1: PBB -->
+                <article class="p-8 rounded-2xl bg-surfaceElevated/60 border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="w-11 h-11 rounded-lg bg-goldAntique/15 text-goldAntique flex items-center justify-center mb-6 font-serif font-bold text-lg">
+                            01
+                        </div>
+                        <h3 class="font-serif font-bold text-2xl text-cream mb-3">Berdirinya Perserikatan Bangsa-Bangsa (PBB)</h3>
+                        <p class="text-sm text-creamMuted leading-relaxed mb-4">
+                            Pada 24 Oktober 1945, PBB resmi didirikan menggantikan Liga Bangsa-Bangsa yang gagal mencegah perang. Tujuannya adalah menjaga perdamaian dunia, melindungi hak asasi manusia, dan memfasilitasi kerja sama internasional.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 text-xs text-goldAntique font-medium">
+                        Piagam PBB ditandatangani oleh 50 negara pendiri
+                    </div>
+                </article>
+
+                <!-- Dampak 2: Perang Dingin -->
+                <article class="p-8 rounded-2xl bg-surfaceElevated/60 border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="w-11 h-11 rounded-lg bg-goldAntique/15 text-goldAntique flex items-center justify-center mb-6 font-serif font-bold text-lg">
+                            02
+                        </div>
+                        <h3 class="font-serif font-bold text-2xl text-cream mb-3">Awal Era Perang Dingin</h3>
+                        <p class="text-sm text-creamMuted leading-relaxed mb-4">
+                            Runtuhnya kekuatan Eropa Barat memunculkan dua negara adidaya baru dengan ideologi berseberangan: Amerika Serikat (Blok Barat/Kapitalis) dan Uni Soviet (Blok Timur/Komunis), memicu perlombaan senjata nuklir selama lebih dari empat dekade.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-white/10 text-xs text-goldAntique font-medium">
+                        Bipolaritas geopolitik global (1947-1991)
+                    </div>
+                </article>
+
+                <!-- Dampak 3: Dekolonisasi & Indonesia -->
+                <article class="p-8 rounded-2xl bg-gradient-to-br from-surfaceElevated to-crimsonDark/20 border border-crimson/40 flex flex-col justify-between">
+                    <div>
+                        <div class="w-11 h-11 rounded-lg bg-crimson/25 text-red-300 flex items-center justify-center mb-6 font-serif font-bold text-lg">
+                            03
+                        </div>
+                        <h3 class="font-serif font-bold text-2xl text-cream mb-3">Dekolonisasi & Kemerdekaan Indonesia</h3>
+                        <p class="text-sm text-creamMuted leading-relaxed mb-4">
+                            Melemahnya kekuatan kolonial Eropa dan menyerahnya Jepang kepada Sekutu pada Agustus 1945 menciptakan momentum historis bagi bangsa-bangsa terjajah di Asia dan Afrika. Di Nusantara, kekosongan kekuasaan (*vacuum of power*) dimanfaatkan oleh Soekarno-Hatta untuk memproklamasikan <strong class="text-cream">Kemerdekaan Indonesia pada 17 Agustus 1945</strong>.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-crimson/30 text-xs text-red-300 font-medium">
+                        Tonggak lahirnya negara-negara merdeka di Asia-Afrika
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="border-t border-white/10 bg-bgDark py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-center sm:text-left">
+                <div class="font-serif font-bold text-lg text-cream mb-1">
+                    ARSIP <span class="text-goldAntique">1939-1945</span> · Edukasi Sejarah Dunia
+                </div>
+                <p class="text-xs text-creamMuted">
+                    Disusun sebagai sarana literasi sejarah yang objektif, edukatif, dan mudah diakses.
+                </p>
+            </div>
+
+            <button id="back-to-top" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-surfaceElevated hover:bg-goldAntique hover:text-bgDark border border-white/10 text-xs font-semibold text-cream transition-all duration-300">
+                <span>Kembali ke Atas</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                </svg>
+            </button>
+        </div>
+    </footer>
+
+    <!-- MODAL POPUP BIOGRAFI TOKOH -->
+    <div id="leader-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm transition-opacity" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="relative w-full max-w-2xl rounded-2xl bg-surfaceDark border border-goldAntique/40 p-6 sm:p-8 shadow-2xl transform transition-all max-h-[90vh] overflow-y-auto">
+            <!-- Tombol Tutup Modal -->
+            <button id="close-modal-btn" aria-label="Tutup Detail" class="absolute top-5 right-5 p-2 rounded-lg bg-surfaceElevated text-creamMuted hover:text-cream hover:bg-crimson transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Konten Modal Dinamis -->
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT UNTUK INTERAKTIVITAS & DATA SEJARAH -->
+    <script>
+        // ==========================================
+        // 1. DATA LINIMASA PERANG DUNIA II (1939-1945)
+        // ==========================================
+        const timelineEvents = [
+            {
+                date: "1 September 1939",
+                year: "1939",
+                phase: "awal",
+                phaseLabel: "Awal Perang",
+                title: "Invasi Jerman ke Polandia",
+                location: "Eropa Tengah",
+                description: "Jerman Nazi melancarkan serangan kilat (Blitzkrieg) ke Polandia. Dua hari kemudian, Inggris dan Prancis menyatakan perang terhadap Jerman, menandai dimulainya Perang Dunia II di Eropa."
+            },
+            {
+                date: "22 Juni 1941",
+                year: "1941",
+                phase: "awal",
+                phaseLabel: "Awal Perang",
+                title: "Operasi Barbarossa",
+                location: "Front Timur (Uni Soviet)",
+                description: "Jerman melanggar pakta non-agresi dan menginvasi Uni Soviet dengan lebih dari 3 juta tentara. Operasi ini membuka Front Timur yang menjadi teater pertempuran paling berdarah dalam sejarah."
+            },
+            {
+                date: "7 Desember 1941",
+                year: "1941",
+                phase: "awal",
+                phaseLabel: "Awal Perang",
+                title: "Serangan Pearl Harbor",
+                location: "Hawaii, Samudra Pasifik",
+                description: "Angkatan Laut Kekaisaran Jepang melancarkan serangan mendadak terhadap pangkalan militer AS di Pearl Harbor. Keesokan harinya, Amerika Serikat resmi terjun ke dalam Perang Dunia II."
+            },
+            {
+                date: "4–7 Juni 1942",
+                year: "1942",
+                phase: "balik",
+                phaseLabel: "Titik Balik",
+                title: "Pertempuran Midway",
+                location: "Samudra Pasifik",
+                description: "Angkatan Laut AS berhasil menenggelamkan empat kapal induk utama Jepang. Kemenangan ini menghentikan ekspansi Jepang dan menjadi titik balik strategis di Teater Pasifik."
+            },
+            {
+                date: "Agustus 1942 - Februari 1943",
+                year: "1942",
+                phase: "balik",
+                phaseLabel: "Titik Balik",
+                title: "Pertempuran Stalingrad",
+                location: "Stalingrad, Uni Soviet",
+                description: "Pertempuran perkotaan paling sengit yang berakhir dengan pengepungan dan menyerahnya Angkatan Darat ke-6 Jerman. Kekalahan ini membalikkan momentum perang di Front Timur."
+            },
+            {
+                date: "6 Juni 1944",
+                year: "1944",
+                phase: "akhir",
+                phaseLabel: "Akhir Perang",
+                title: "D-Day: Invasi Normandia",
+                location: "Pantai Normandia, Prancis",
+                description: "Operasi amfibi terbesar dalam sejarah dilakukan oleh pasukan Sekutu mendarat di Prancis utara, membuka front barat baru untuk membebaskan Eropa Barat dari pendudukan Nazi."
+            },
+            {
+                date: "8 Mei 1945",
+                year: "1945",
+                phase: "akhir",
+                phaseLabel: "Akhir Perang",
+                title: "Menyerahnya Jerman (V-E Day)",
+                location: "Berlin & Reims, Eropa",
+                description: "Setelah pasukan Soviet merebut Berlin dan kematian Adolf Hitler, komando tinggi militer Jerman menandatangani kapitulasi tanpa syarat, mengakhiri perang di Eropa."
+            },
+            {
+                date: "6 & 9 Agustus - 2 September 1945",
+                year: "1945",
+                phase: "akhir",
+                phaseLabel: "Akhir Perang",
+                title: "Pengeboman Hiroshima-Nagasaki & Kapitulasi Jepang",
+                location: "Jepang & Teluk Tokyo",
+                description: "Amerika Serikat menjatuhkan bom atom di Hiroshima dan Nagasaki. Kaisar Hirohito mengumumkan menyerahnya Jepang pada 15 Agustus, dan dokumen kapitulasi resmi ditandatangani pada 2 September 1945."
+            }
+        ];
+
+        // ==========================================
+        // 2. DATA TOKOH-TOKOH KUNCI
+        // ==========================================
+        const keyLeaders = [
+            {
+                id: "churchill",
+                name: "Winston Churchill",
+                role: "Perdana Menteri Britania Raya",
+                faction: "Blok Sekutu",
+                factionType: "allied",
+                years: "1874 - 1965",
+                initials: "WC",
+                shortDesc: "Pemimpin simbol perlawanan Inggris yang menolak berdamai dengan Jerman Nazi pada masa-masa tersulit Eropa.",
+                bio: "Winston Churchill menjabat sebagai Perdana Menteri Inggris sejak Mei 1940. Pidato-pidatonya yang membakar semangat menjaga moral rakyat Inggris selama serangan udara Jerman (The Blitz). Ia menjalin aliansi erat dengan Franklin D. Roosevelt dan Joseph Stalin untuk merancang strategi kekalahan Blok Poros.",
+                keyMoment: "Menginisiasi Piagam Atlantik (1941) dan memimpin pertahanan Inggris saat Eropa daratan jatuh ke tangan Nazi."
+            },
+            {
+                id: "roosevelt",
+                name: "Franklin D. Roosevelt",
+                role: "Presiden Amerika Serikat ke-32",
+                faction: "Blok Sekutu",
+                factionType: "allied",
+                years: "1882 - 1945",
+                initials: "FDR",
+                shortDesc: "Menjadikan Amerika Serikat sebagai 'Gudang Senjata Demokrasi' dan memimpin mobilisasi industri raksasa Sekutu.",
+                bio: "Sebelum AS terjun langsung dalam perang, Roosevelt meluncurkan program Lend-Lease untuk memasok logistik dan persenjataan kepada Sekutu. Pasca-serangan Pearl Harbor, ia mengarahkan strategi perang dua samudra (Eropa dan Pasifik) serta merancang konsep awal Perserikatan Bangsa-Bangsa.",
+                keyMoment: "Memobilisasi ekonomi industri AS dan berpartisipasi dalam Konferensi Teheran serta Yalta."
+            },
+            {
+                id: "stalin",
+                name: "Joseph Stalin",
+                role: "Pemimpin Tertinggi Uni Soviet",
+                faction: "Blok Sekutu",
+                factionType: "allied",
+                years: "1878 - 1953",
+                initials: "JS",
+                shortDesc: "Memimpin Tentara Merah menghadapi serangan utama Jerman Nazi di Front Timur dengan pengorbanan luar biasa.",
+                bio: "Setelah Jerman melancarkan Operasi Barbarossa pada 1941, Stalin memindahkan industri berat Soviet ke Pegunungan Ural dan memobilisasi seluruh sumber daya negara. Di bawah komandonya, Tentara Merah membalikkan keadaan di Stalingrad dan Kursk hingga berhasil merebut Berlin pada Mei 1945.",
+                keyMoment: "Kemenangan strategis Tentara Merah di Stalingrad dan perebutan Berlin pada akhir perang Eropa."
+            },
+            {
+                id: "hitler",
+                name: "Adolf Hitler",
+                role: "Diktator Jerman Nazi (Führer)",
+                faction: "Blok Poros",
+                factionType: "axis",
+                years: "1889 - 1945",
+                initials: "AH",
+                shortDesc: "Arsitek utama pecahnya Perang Dunia II di Eropa dan dalang di balik genosida sistematis Holocaust.",
+                bio: "Sebagai pemimpin Partai Nazi, Hitler membangun kembali kekuatan militer Jerman, menganeksasi Austria serta Cekoslowakia, dan memerintahkan invasi ke Polandia pada 1939. Ambisi ekspansionis dan ideologi rasialnya mengakibatkan kehancuran total Eropa serta pembantaian enam juta orang Yahudi dan jutaan korban lainnya.",
+                keyMoment: "Memerintahkan invasi Polandia (1939) dan Operasi Barbarossa (1941) sebelum bunuh diri di bunker Berlin (1945)."
+            },
+            {
+                id: "mussolini",
+                name: "Benito Mussolini",
+                role: "Perdana Menteri & Diktator Italia (Il Duce)",
+                faction: "Blok Poros",
+                factionType: "axis",
+                years: "1883 - 1945",
+                initials: "BM",
+                shortDesc: "Pendiri fasisme Italia yang membawa negaranya bersekutu dengan Jerman Nazi demi ambisi kekaisaran Mediterania.",
+                bio: "Mussolini memerintah Italia secara diktator sejak 1922 dan bergabung dalam perang di pihak Jerman pada Juni 1940. Namun, kampanye militer Italia di Afrika Utara dan Yunani mengalami kegagalan besar, memaksa Jerman melakukan intervensi hingga akhirnya rezim Mussolini digulingkan pada 1943.",
+                keyMoment: "Menandatangani Pakta Baja dengan Jerman (1939) dan Pakta Tripartit (1940)."
+            },
+            {
+                id: "tojo",
+                name: "Hideki Tojo",
+                role: "Perdana Menteri & Jenderal Kekaisaran Jepang",
+                faction: "Blok Poros",
+                factionType: "axis",
+                years: "1884 - 1948",
+                initials: "HT",
+                shortDesc: "Pemimpin militeristik Jepang yang menyetujui serangan ke Pearl Harbor dan ekspansi ke Asia Tenggara.",
+                bio: "Menjabat sebagai Perdana Menteri Jepang dari Oktober 1941 hingga Juli 1944, Tojo mengawasi puncak ekspansi militer Jepang di Asia-Pasifik, termasuk pendudukan Hindia Belanda (Indonesia). Setelah serangkaian kekalahan militer Jepang pada 1944, ia dipaksa mengundurkan diri dari jabatannya.",
+                keyMoment: "Mengotorisasi serangan ke Pearl Harbor pada Desember 1941 yang memicu Perang Pasifik."
+            }
+        ];
+
+        // ==========================================
+        // 3. RENDER LINIMASA & LOGIKA FILTER
+        // ==========================================
+        const timelineContainer = document.getElementById('timeline-container');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        function renderTimeline(filter = 'all') {
+            const filtered = filter === 'all' 
+                ? timelineEvents 
+                : timelineEvents.filter(item => item.phase === filter);
+
+            timelineContainer.innerHTML = filtered.map((item, index) => {
+                const isEven = index % 2 === 0;
+                const badgeColor = item.phase === 'awal' 
+                    ? 'bg-goldAntique/20 text-goldAntique border-goldAntique/30' 
+                    : item.phase === 'balik' 
+                        ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' 
+                        : 'bg-crimson/20 text-red-300 border-crimson/40';
+
+                return `
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pl-12 md:pl-0 transition-all duration-500">
+                        <!-- Titik Node di Garis Timeline -->
+                        <div class="absolute left-[13px] md:left-1/2 md:-translate-x-1/2 top-2 md:top-1/2 md:-translate-y-1/2 w-4 h-4 rounded-full bg-bgDark border-4 border-goldAntique shadow-[0_0_12px_rgba(197,160,89,0.7)] z-10"></div>
+
+                        <!-- Kolom Kiri (Tanggal pada Desktop jika genap, Kartu jika ganjil) -->
+                        <div class="w-full md:w-[45%] ${isEven ? 'md:text-right md:pr-8' : 'md:order-2 md:pl-8'}">
+                            ${isEven ? `
+                                <span class="inline-block font-serif font-bold text-2xl sm:text-3xl text-goldAntique mb-1">${item.date}</span>
+                                <div class="text-xs uppercase tracking-widest text-creamMuted">${item.location}</div>
+                            ` : `
+                                <div class="p-6 sm:p-7 rounded-2xl bg-surfaceDark border border-white/10 hover:border-goldAntique/40 transition-all shadow-lg">
+                                    <div class="flex items-center justify-between gap-2 mb-3">
+                                        <span class="px-2.5 py-1 rounded text-[11px] font-semibold uppercase tracking-wider border ${badgeColor}">
+                                            ${item.phaseLabel}
+                                        </span>
+                                        <span class="md:hidden text-xs font-bold text-goldAntique">${item.year}</span>
+                                    </div>
+                                    <h3 class="font-serif font-bold text-xl sm:text-2xl text-cream mb-2">${item.title}</h3>
+                                    <p class="text-sm text-creamMuted leading-relaxed">${item.description}</p>
+                                </div>
+                            `}
+                        </div>
+
+                        <!-- Kolom Kanan (Kartu pada Desktop jika genap, Tanggal jika ganjil) -->
+                        <div class="w-full md:w-[45%] ${isEven ? 'md:pl-8' : 'md:order-1 md:text-right md:pr-8'}">
+                            ${isEven ? `
+                                <div class="p-6 sm:p-7 rounded-2xl bg-surfaceDark border border-white/10 hover:border-goldAntique/40 transition-all shadow-lg">
+                                    <div class="flex items-center justify-between gap-2 mb-3">
+                                        <span class="px-2.5 py-1 rounded text-[11px] font-semibold uppercase tracking-wider border ${badgeColor}">
+                                            ${item.phaseLabel}
+                                        </span>
+                                        <span class="md:hidden text-xs font-bold text-goldAntique">${item.year}</span>
+                                    </div>
+                                    <h3 class="font-serif font-bold text-xl sm:text-2xl text-cream mb-2">${item.title}</h3>
+                                    <p class="text-sm text-creamMuted leading-relaxed">${item.description}</p>
+                                </div>
+                            ` : `
+                                <span class="hidden md:inline-block font-serif font-bold text-2xl sm:text-3xl text-goldAntique mb-1">${item.date}</span>
+                                <div class="hidden md:block text-xs uppercase tracking-widest text-creamMuted">${item.location}</div>
+                                <div class="md:hidden text-xs font-semibold text-goldAntique mt-1">${item.date} · ${item.location}</div>
+                            `}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Event Listener Tombol Filter
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-goldAntique', 'text-bgDark', 'shadow-md');
+                    b.classList.add('bg-surfaceElevated', 'text-creamMuted', 'border', 'border-white/10');
+                });
+                btn.classList.remove('bg-surfaceElevated', 'text-creamMuted', 'border', 'border-white/10');
+                btn.classList.add('bg-goldAntique', 'text-bgDark', 'shadow-md');
+                
+                renderTimeline(btn.dataset.filter);
+            });
+        });
+
+        // ==========================================
+        // 4. RENDER TOKOH KUNCI & LOGIKA MODAL
+        // ==========================================
+        const leadersGrid = document.getElementById('leaders-grid');
+        const leaderModal = document.getElementById('leader-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        function renderLeaders() {
+            leadersGrid.innerHTML = keyLeaders.map(leader => {
+                const isAllied = leader.factionType === 'allied';
+                const accentBorder = isAllied ? 'hover:border-goldAntique/60' : 'hover:border-crimson/60';
+                const badgeStyle = isAllied 
+                    ? 'bg-goldAntique/15 text-goldAntique border-goldAntique/30' 
+                    : 'bg-crimson/15 text-red-400 border-crimson/30';
+                const avatarStyle = isAllied
+                    ? 'bg-gradient-to-br from-goldAntique/30 to-surfaceElevated text-goldLight border-goldAntique/40'
+                    : 'bg-gradient-to-br from-crimson/30 to-surfaceElevated text-red-300 border-crimson/40';
+
+                return `
+                    <button type="button" onclick="openLeaderModal('${leader.id}')" class="text-left group p-6 sm:p-7 rounded-2xl bg-surfaceDark border border-white/10 ${accentBorder} transition-all duration-300 hover:-translate-y-1 shadow-lg flex flex-col justify-between focus:outline-none focus:ring-2 focus:ring-goldAntique">
+                        <div>
+                            <div class="flex items-center justify-between gap-4 mb-5">
+                                <!-- Monogram Portrait Bergaya Editorial -->
+                                <div class="w-14 h-14 rounded-2xl border ${avatarStyle} flex items-center justify-center font-serif font-bold text-xl tracking-wider shadow-inner">
+                                    ${leader.initials}
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider border ${badgeStyle}">
+                                    ${leader.faction}
+                                </span>
+                            </div>
+
+                            <h3 class="font-serif font-bold text-xl sm:text-2xl text-cream group-hover:text-goldAntique transition-colors mb-1">
+                                ${leader.name}
+                            </h3>
+                            <p class="text-xs font-medium text-goldAntique/90 mb-4">${leader.role}</p>
+                            <p class="text-sm text-creamMuted leading-relaxed mb-6">
+                                ${leader.shortDesc}
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-cream group-hover:text-goldAntique transition-colors">
+                            <span>Baca Profil Lengkap</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function openLeaderModal(leaderId) {
+            const leader = keyLeaders.find(l => l.id === leaderId);
+            if (!leader) return;
+
+            const isAllied = leader.factionType === 'allied';
+            const badgeStyle = isAllied 
+                ? 'bg-goldAntique/20 text-goldAntique border-goldAntique/40' 
+                : 'bg-crimson/20 text-red-300 border-crimson/40';
+
+            modalContent.innerHTML = `
+                <div class="flex items-center gap-4 mb-6 pr-8">
+                    <div class="w-16 h-16 rounded-2xl bg-surfaceElevated border border-goldAntique/40 flex items-center justify-center font-serif font-bold text-2xl text-goldLight shrink-0">
+                        ${leader.initials}
+                    </div>
+                    <div>
+                        <span class="inline-block px-3 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider border ${badgeStyle} mb-2">
+                            ${leader.faction} · ${leader.years}
+                        </span>
+                        <h3 id="modal-title" class="font-serif font-bold text-2xl sm:text-3xl text-cream">
+                            ${leader.name}
+                        </h3>
+                        <p class="text-sm text-goldAntique">${leader.role}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-sm sm:text-base text-creamMuted leading-relaxed border-t border-white/10 pt-5">
+                    <p>${leader.bio}</p>
+                    <div class="p-4 rounded-xl bg-surfaceElevated/80 border-l-4 ${isAllied ? 'border-goldAntique' : 'border-crimson'}">
+                        <div class="text-xs uppercase tracking-wider font-bold text-cream mb-1">Peran & Momen Krusial</div>
+                        <p class="text-sm text-cream/90">${leader.keyMoment}</p>
+                    </div>
+                </div>
+            `;
+
+            leaderModal.classList.remove('hidden');
+            leaderModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLeaderModal() {
+            leaderModal.classList.add('hidden');
+            leaderModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        closeModalBtn.addEventListener('click', closeLeaderModal);
+        leaderModal.addEventListener('click', (e) => {
+            if (e.target === leaderModal) closeLeaderModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !leaderModal.classList.contains('hidden')) {
+                closeLeaderModal();
+            }
+        });
+
+        // ==========================================
+        // 5. NAVBAR STICKY, MOBILE MENU & SCROLL REVEAL
+        // ==========================================
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        // Efek backdrop blur navbar saat scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                navbar.classList.add('bg-bgDark/90', 'backdrop-blur-md', 'border-white/10', 'shadow-lg');
+                navbar.classList.remove('border-transparent');
+            } else {
+                navbar.classList.remove('bg-bgDark/90', 'backdrop-blur-md', 'border-white/10', 'shadow-lg');
+                navbar.classList.add('border-transparent');
+            }
+        });
+
+        // Toggle Menu Mobile
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                iconOpen.classList.add('hidden');
+                iconClose.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+            });
+        });
+
+        // Tombol Kembali ke Atas
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Intersection Observer untuk animasi fade-in saat scroll
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Inisialisasi Awal
+        renderTimeline('all');
+        renderLeaders();
+    </script>
+</body>
+</html>
